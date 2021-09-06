@@ -1,12 +1,10 @@
 import React from "react";
+import SearchInput from './SearchInput'
 
-function Search() {
+function Search({ onSearch }) {
   return (
     <div className="ui search">
-      <div className="ui icon input">
-        <input className="prompt" />
-        <i className="search icon" />
-      </div>
+      <SearchInput onSearch={onSearch}/>
     </div>
   );
 }
