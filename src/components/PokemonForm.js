@@ -14,14 +14,41 @@ function PokemonForm({ onNewPokemon }) {
     setFormData({ ...formData, [name]: value })
   }
 
+  function handleFormSubmit(event) {
+    event.preventDefault()
+    const {name, hp, frontUrl, backUrl} = formData
+    const poke = {
+      name,
+      hp,
+      sprites: {
+        front: frontUrl,
+        back: backUrl
+      }
+    }
+
+    fetch('http://localhost:3001/pokemon', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(poke)
+    })
+    .then(r => r.json())
+    .then(poke => {
+      onNewPokemon(poke)
+      setFormData({
+        name: '',
+        hp: '',
+        frontUrl: '',
+        backUrl: ''
+      })
+    })
+  }
+
   return (
     <div>
       <h3>Add a Pokemon!</h3>
-      <Form
-        onSubmit={() => {
-          console.log("submitting form...");
-        }}
-      >
+      <Form onSubmit={handleFormSubmit}>
         <Form.Group widths="equal">
           <Form.Input 
             fluid 
