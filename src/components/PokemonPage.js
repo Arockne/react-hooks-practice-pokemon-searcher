@@ -31,7 +31,7 @@ function PokemonPage() {
       <br />
       <Search />
       <br />
-      <PokemonCollection />
+      <PokemonCollection pokemon={pokemon}/>
     </Container>
   );
 }
